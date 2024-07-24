@@ -6,6 +6,9 @@
 .pnp.js
 .yarn/install-state.gz
 
+# my books
+/my_books
+
 # testing
 /coverage
 
