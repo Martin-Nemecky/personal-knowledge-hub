@@ -1,17 +1,23 @@
-import { Button, Card, CardActions, CardContent, Paper, Typography } from "@mui/material";
+"use client";
+
+import { Button, Card, CardActions, CardContent, IconButton, Paper, Typography } from "@mui/material";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import Image from "next/image";
 
 import Link from "next/link";
 import { Book } from "@/db/type-definitions";
+import { useRouter } from "next/navigation";
+import AddIcon from "@mui/icons-material/Add";
 
 interface Params {
 	books: Book[];
 }
 
 export default function BookSection({ books }: Params) {
+	const router = useRouter();
+
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-8">
 			<Paper
 				elevation={10}
 				id="books"
@@ -52,6 +58,49 @@ export default function BookSection({ books }: Params) {
 					</div>
 				</div>
 			</Paper>
+			<div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-4">
+				<Paper
+					className=" py-[55px] bg-gray-200 flex flex-col gap-4 justify-center items-center rounded-3xl hover:bg-gray-100 hover:cursor-pointer active:bg-gray-50"
+					onClick={() => router.push("/books/bookForm")}
+				>
+					<AddIcon className="size-20" />
+					<p className="font-semibold text-2xl">Create new book</p>
+				</Paper>
+				{books.map((book) => {
+					return (
+						<div key={book.id} className="relative w-full">
+							{/*
+		 						This element is used as a anchor for links referencing this particular book.
+		 					 	It moves content of the page a bit down, so that the book card is not covered by the navigation bar.
+		 					*/}
+							<div id={book.id} className="invisible absolute top-[-5.5rem]"></div>
+
+							{/* Book card */}
+							<Link href={`/books/${book.id}`}>
+								<Card className="w-full rounded-3xl border hover:shadow-lg hover:shadow-gray-600  hover:cursor-pointer">
+									<CardContent>
+										<Typography gutterBottom variant="h5" className="text-blue-700 font-medium">
+											{book.title}
+										</Typography>
+										<Typography variant="body1" color="text.secondary">
+											{JSON.stringify(book.authors.map((a) => `${a.firstName} ${a.lastName}`))
+												.replace(/[\[\]\"]/g, "")
+												.replace(",", ", ")}
+										</Typography>
+
+										<Typography variant="body2" color="text.secondary" className="pt-8 line-clamp-3 text-black">
+											{book.description}
+										</Typography>
+									</CardContent>
+									<CardActions>
+										<Button size="small">Learn More</Button>
+									</CardActions>
+								</Card>
+							</Link>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 		// <div className="flex flex-col gap-4">
 		// 	<div className="flex gap-4 items-center">
@@ -67,42 +116,7 @@ export default function BookSection({ books }: Params) {
 		// 	</p>
 
 		// 	{/* CARDS */}
-		// 	<div className="flex gap-4 flex-wrap">
-		// 		{books.map((book) => {
-		// 			return (
-		// 				<div key={book.id} className="relative w-full">
-		// 					{/*
-		// 						This element is used as a anchor for links referencing this particular book.
-		// 					 	It moves content of the page a bit down, so that the book card is not covered by the navigation bar.
-		// 					*/}
-		// 					<div id={book.id} className="invisible absolute top-[-5.5rem]"></div>
 
-		// 					{/* Book card */}
-		// 					<Link href={`/books/${book.id}`}>
-		// 						<Card className="w-full rounded-lg border hover:shadow-lg hover:shadow-gray-600  hover:cursor-pointer">
-		// 							<CardContent>
-		// 								<Typography gutterBottom variant="h5" className="text-blue-700 font-medium">
-		// 									{book.title}
-		// 								</Typography>
-		// 								<Typography variant="body1" color="text.secondary">
-		// 									{JSON.stringify(book.authors.map((a) => `${a.firstName} ${a.lastName}`))
-		// 										.replace(/[\[\]\"]/g, "")
-		// 										.replace(",", ", ")}
-		// 								</Typography>
-
-		// 								<Typography variant="body2" color="text.secondary" className="pt-8 line-clamp-3 text-black">
-		// 									{book.description}
-		// 								</Typography>
-		// 							</CardContent>
-		// 							<CardActions>
-		// 								<Button size="small">Learn More</Button>
-		// 							</CardActions>
-		// 						</Card>
-		// 					</Link>
-		// 				</div>
-		// 			);
-		// 		})}
-		// 	</div>
 		// </div>
 	);
 }

@@ -23,6 +23,9 @@ export const categoryAssignmentsTable = pgTable("category_assignments_table", {
 	bookId: text("book_id")
 		.notNull()
 		.references(() => booksTable.id, { onDelete: "cascade" }),
+	ownerId: text("owner_id")
+		.notNull()
+		.references(() => usersTable.id, { onDelete: "cascade" }),
 });
 
 export const authorsTable = pgTable("authors_table", {
@@ -39,6 +42,9 @@ export const authorAssignmentsTable = pgTable("author_assignments_table", {
 	bookId: text("book_id")
 		.notNull()
 		.references(() => booksTable.id, { onDelete: "cascade" }),
+	ownerId: text("owner_id")
+		.notNull()
+		.references(() => usersTable.id, { onDelete: "cascade" }),
 });
 
 export const usersTable = pgTable("users_table", {

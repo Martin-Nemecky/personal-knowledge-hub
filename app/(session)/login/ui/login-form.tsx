@@ -1,12 +1,11 @@
 "use client";
 
 import { signIn } from "@/app/_actions/auth-actions";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginForm() {
 	const searchParams = useSearchParams();
-	const router = useRouter();
 	const [isPending, setIsPending] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
@@ -28,25 +27,19 @@ export default function LoginForm() {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className={`flex flex-col gap-3 sm:h-[400px] h-[450px] bg-white shadow-2xl mx-4 rounded-3xl p-10`}
+			className={`flex flex-col gap-3 sm:h-[450px] h-[500px] bg-white shadow-2xl mx-4 rounded-3xl p-10`}
 		>
 			<h1 className="text-4xl text-center pt-10 px-6 font-black ">Personal Knowledge Hub</h1>
-			<h1 className="text text-center px-6 text-gray-600 ">You have to sign in first to get to your content.</h1>
+			<h1 className="text text-center px-6 text-gray-600 ">Sign in to get to your personal content.</h1>
 			<div className="h-[20px]"></div>
-			<input
-				type="text"
-				name="username"
-				placeholder="Username"
-				className={`border rounded-lg p-2`}
-				required={true}
-			/>
-			<input
-				type="password"
-				name="password"
-				placeholder="Password"
-				className={`border rounded-lg p-2`}
-				required={true}
-			/>
+			<label className="w-[90px] text-sm relative top-5 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
+				Username*
+			</label>
+			<input type="text" name="username" className={`border rounded-lg p-2`} required={true} />
+			<label className="w-[90px] text-sm relative top-5 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
+				Password*
+			</label>
+			<input type="password" name="password" className={`border rounded-lg p-2`} required={true} />
 
 			{errorMessage !== "" ? <p className="text-red-600 text-base text-center">{errorMessage}</p> : ""}
 			<button

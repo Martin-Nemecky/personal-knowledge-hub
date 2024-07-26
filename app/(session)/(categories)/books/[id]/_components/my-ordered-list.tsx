@@ -13,7 +13,7 @@ export default function MyOrderedList({ children }: Params) {
 					<Paper
 						elevation={10}
 						sx={{ "&:hover": { boxShadow: "0px 0px 0px gray" } }}
-						className="p-6 rounded-2xl border border-gray-400"
+						className="p-6 rounded-2xl border border-gray-400 overflow-auto"
 					>
 						{child}
 					</Paper>

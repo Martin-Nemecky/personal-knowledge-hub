@@ -91,7 +91,7 @@ export default function Header({ user }: Params) {
 
 			<div className="flex flex-col items-center justify-center py-4 md:py-20 gap-4">
 				<h1 className="font-black text-white lg:text-6xl md:text-4xl text-3xl">Personal Knowledge Hub</h1>
-				<h3 className="font-medium lg:text-xl md:text-lg text-base text-wrap px-4 text-gray-300">
+				<h3 className="font-medium lg:text-xl md:text-lg text-base text-wrap md:px-4 text-gray-300">
 					Manage all the personal wisdom in one place.
 				</h3>
 			</div>
