@@ -10,7 +10,12 @@ import Tabs from "./tabs";
 
 export default function Features() {
 	const [selectedValue, setSelectedValue] = useState(0);
-	const contents = [<BooksSection />, <ThoughtsSection />, <ExperiencesSection />, <FactsSection />];
+	const contents = [
+		<BooksSection key={0} />,
+		<ThoughtsSection key={1} />,
+		<ExperiencesSection key={2} />,
+		<FactsSection key={3} />,
+	];
 
 	return (
 		<main>

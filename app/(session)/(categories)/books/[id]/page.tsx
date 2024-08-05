@@ -27,7 +27,7 @@ export default function BookDetails() {
 		}
 
 		getData();
-	}, []);
+	}, [params.id]);
 
 	return (
 		<article className="py-10 2xl:px-96 xl:px-60 lg:px-20 px-4">
