@@ -46,14 +46,14 @@ export default function Books() {
 
 	return (
 		<section className="flex lg:flex-row flex-col size-full">
-			<section className="lg:fixed left-8 top-28 bottom-0 lg:w-60 lg:z-10 pe-4 pt-4 lg:pt-0 lg:overflow-y-auto">
+			<section className="lg:fixed left-8 top-28 bottom-0 lg:w-60 lg:z-10 pt-4 lg:pt-0 lg:overflow-y-auto">
 				<CategorySection
 					allCategories={categories}
 					selectedCategories={selectedCategories}
 					setSelectedCategories={setSelectedCategories}
 				/>
 			</section>
-			<section className="lg:ps-96 pe-4 lg:pe-8 xl:pe-96 pt-12 ">
+			<section className="lg:ps-96 lg:pe-8 xl:pe-96 pt-12 ">
 				<BookSection books={visibleBooks} />
 			</section>
 			<section className="hidden xl:block fixed right-8 top-28 bottom-0 w-60 z-10 overflow-y-auto">
