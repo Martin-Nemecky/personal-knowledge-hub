@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function BooksSection() {
 	return (
-		<article id="books" className="w-full flex flex-col xl:flex-row shadow-inner bg-gray-100 px-20">
+		<article id="books" className="w-full flex flex-col xl:flex-row shadow-inner bg-gray-100 sm:px-20 px-8">
 			<section className="lg:basis-1/2 lg:ps-32 lg:py-20 xl:pt-28 xl:pb-36 pt-8">
 				<h1 className="font-bold text-3xl">Books</h1>
 				<p className="pt-6">
