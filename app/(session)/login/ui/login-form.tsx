@@ -29,18 +29,23 @@ export default function LoginForm() {
 			onSubmit={handleSubmit}
 			className={`flex flex-col gap-3 sm:h-[450px] h-[500px] bg-white shadow-2xl mx-4 rounded-3xl p-10`}
 		>
-			<h1 className="text-4xl text-center pt-10 px-6 font-black ">Personal Knowledge Hub</h1>
-			<h1 className="text text-center px-6 text-gray-600 ">Sign in to get to your personal content.</h1>
+			<hgroup>
+				<h1 className="text-4xl text-center pt-10 px-6 font-black ">Personal Knowledge Hub</h1>
+				<h2 className="text text-center px-6 text-gray-600 ">Sign in to get to your personal content.</h2>
+			</hgroup>
 			<div className="h-[20px]"></div>
-			<label className="w-[90px] text-sm relative top-5 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
-				Username*
-			</label>
-			<input type="text" name="username" className={`border rounded-lg p-2`} required={true} />
-			<label className="w-[90px] text-sm relative top-5 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
-				Password*
-			</label>
-			<input type="password" name="password" className={`border rounded-lg p-2`} required={true} />
-
+			<div className="flex flex-col">
+				<label className="w-[90px] text-sm relative top-2 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
+					Username*
+				</label>
+				<input type="text" name="username" className={`border rounded-lg p-2`} required={true} />
+			</div>
+			<div className="flex flex-col">
+				<label className="w-[90px] text-sm relative top-2 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
+					Password*
+				</label>
+				<input type="password" name="password" className={`border rounded-lg p-2`} required={true} />
+			</div>
 			{errorMessage !== "" ? <p className="text-red-600 text-base text-center">{errorMessage}</p> : ""}
 			<button
 				className={`font-bold bg-green-600 text-white rounded-lg hover:bg-green-500 active:bg-green-400 uppercase to-95% p-3`}

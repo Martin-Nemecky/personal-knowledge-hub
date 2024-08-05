@@ -3,7 +3,7 @@
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "../(session)/_lib/session";
-import { readUserByUsername } from "@/db/queries";
+import { readUserByUsername } from "@/db/queries/user-queries";
 
 export async function signIn(username: string, password: string, searchFromParam: string | null) {
 	if (username == null || password == null) {

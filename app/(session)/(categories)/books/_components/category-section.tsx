@@ -1,16 +1,16 @@
-import { Category } from "@/db/type-definitions";
+import { Category } from "@/app/_types/definitions";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Autocomplete, IconButton, TextField } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-interface Params {
+interface Props {
 	allCategories: Category[];
 	selectedCategories: Category[];
 	setSelectedCategories: Dispatch<SetStateAction<Category[]>>;
 }
 
-export default function CategorySection({ allCategories, selectedCategories, setSelectedCategories }: Params) {
+export default function CategorySection({ allCategories, selectedCategories, setSelectedCategories }: Props) {
 	return (
 		<aside className="flex flex-col gap-4">
 			<header>
@@ -34,10 +34,10 @@ export default function CategorySection({ allCategories, selectedCategories, set
 				}}
 			/>
 
-			<div className="flex gap-2 flex-wrap">
+			<ul className="flex gap-2 flex-wrap">
 				{selectedCategories.map((category) => {
 					return (
-						<div
+						<li
 							key={category.id}
 							className="flex gap-2 items-center py-1 ps-3 pe-1  rounded-full shadow-md border border-1 border-gray-400 "
 						>
@@ -56,10 +56,10 @@ export default function CategorySection({ allCategories, selectedCategories, set
 							>
 								<ClearIcon className="size-4 text-red-700" />
 							</IconButton>
-						</div>
+						</li>
 					);
 				})}
-			</div>
+			</ul>
 		</aside>
 	);
 }

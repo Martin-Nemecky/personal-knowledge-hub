@@ -6,14 +6,17 @@ import ClearIcon from "@mui/icons-material/Clear";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { v4 as uuid4 } from "uuid";
 import ContentEditor from "./content-editor";
-import { Author, Category } from "@/db/type-definitions";
+
 import React from "react";
 import { createBook } from "@/app/_actions/book-actions";
+import { Author, Category } from "@/app/_types/definitions";
+import { useRouter } from "next/navigation";
 
 const initContent =
-	"# Your title\n## Your author's name\n### Description\n Some description...\n\n### Contents\n\n\n1. Chapter one\n- line 1\n    - line 1/1\n- line 2\n\n2. Chapter two\n- line 1\n";
+	"# Your title\n\n## Your author's name\n\n### Description\nSome description...\n\n### Contents\n\n1. Chapter one\n- line 1\n    - line 1/1\n- line 2\n\n2. Chapter two\n- line 1\n";
 
 export default function BookForm() {
+	const router = useRouter();
 	const [categories, setCategories] = useState<Category[]>([{ id: uuid4(), name: "" }]);
 	const [authors, setAuthors] = useState<Author[]>([{ id: uuid4(), firstName: "", lastName: "" }]);
 	const [contentValue, setContentValue] = useState(initContent);
@@ -67,15 +70,22 @@ export default function BookForm() {
 			<DescriptionField />
 			<ContentField contentValue={contentValue} setContentValue={setContentValue} />
 
-			<div className="h-[20px]"></div>
-
 			{errorMessage !== "" ? <p className="text-red-600 text-base text-center">{errorMessage}</p> : ""}
-			<button
-				className={`font-bold bg-green-600 text-white rounded-lg hover:bg-green-500 active:bg-green-400 uppercase to-95% p-3`}
-				type="submit"
-			>
-				{isPending ? "Creating..." : "Create"}
-			</button>
+			<section className="flex justify-end gap-4">
+				<button
+					type="button"
+					className="font-bold text-red-600 rounded-lg hover:bg-gray-200 active:bg-gray-100 uppercase to-95% px-10 py-3"
+					onClick={() => router.back()}
+				>
+					Cancel
+				</button>
+				<button
+					className={`font-bold bg-green-600 text-white rounded-lg hover:bg-green-500 active:bg-green-400 uppercase to-95% px-10 py-3`}
+					type="submit"
+				>
+					{isPending ? "Saving..." : "Save"}
+				</button>
+			</section>
 		</form>
 	);
 }
@@ -86,7 +96,7 @@ function TitleField() {
 			<label className="w-[70px] text-sm relative top-5 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
 				Title*
 			</label>
-			<input type="text" name="title" className={`border rounded-lg p-2`} required={true} />
+			<input title="Title" type="text" name="title" className={`border rounded-lg p-2`} required={true} />
 		</>
 	);
 }
@@ -110,6 +120,7 @@ function AuthorsField({ authors, setAuthors }: AuthorParams) {
 								</label>
 								<input
 									type="text"
+									title="First name"
 									name={"firstname" + author.id}
 									defaultValue={author.firstName}
 									className={`w-full border grow rounded-lg p-2`}
@@ -122,6 +133,7 @@ function AuthorsField({ authors, setAuthors }: AuthorParams) {
 								</label>
 								<input
 									type="text"
+									title="Last name"
 									name={"lastname" + author.id}
 									defaultValue={author.lastName}
 									className={`w-full border grow rounded-lg p-2`}
@@ -177,6 +189,7 @@ function CategoriesField({ categories, setCategories }: CategoryParams) {
 						<div className="flex flex-row items-center">
 							<input
 								type="text"
+								title="Category"
 								name={"category" + category.id}
 								defaultValue={category.name}
 								className={`border grow rounded-lg p-2`}
@@ -220,7 +233,12 @@ function DescriptionField() {
 			<label className="w-[90px] text-sm relative top-6 left-1 text-gray-600 rounded-lg bg-white z-10 text-center">
 				Description
 			</label>
-			<textarea name="description" className={`h-[100px] border rounded-lg p-2`} required={true} />
+			<textarea
+				title="Description"
+				name="description"
+				className={`h-[100px] border rounded-lg p-2`}
+				required={true}
+			/>
 		</>
 	);
 }
@@ -296,7 +314,7 @@ function ContentField({ contentValue, setContentValue }: ContentParams) {
 		<div className="p-4 flex flex-col gap-4 border rounded-lg">
 			<div className="flex gap-2 items-center">
 				<p className="font-medium text-lg">Content</p>
-				<IconButton className={helpColor} onClick={() => setTooltipOpen((prev) => !prev)}>
+				<IconButton title="Help" className={helpColor} onClick={() => setTooltipOpen((prev) => !prev)}>
 					<HelpOutlineIcon />
 				</IconButton>
 			</div>

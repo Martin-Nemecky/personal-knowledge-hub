@@ -3,40 +3,45 @@
 import { Button, Card, CardActions, CardContent, IconButton, Paper, Typography } from "@mui/material";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import Image from "next/image";
-
 import Link from "next/link";
-import { Book } from "@/db/type-definitions";
 import { useRouter } from "next/navigation";
 import AddIcon from "@mui/icons-material/Add";
+import { Book } from "@/app/_types/definitions";
+import RemoveDialog from "./remove-dialog";
 
-interface Params {
+interface Props {
 	books: Book[];
 }
 
-export default function BookSection({ books }: Params) {
+export default function BookSection({ books }: Props) {
 	const router = useRouter();
 
 	return (
-		<div className="flex flex-col gap-8">
+		<section className="flex flex-col gap-8">
 			<Paper
 				elevation={10}
 				id="books"
-				className="w-full flex flex-col 2xl:flex-row bg-blue-50 border border-1 border-gray-400 ps-8 p-4 rounded-3xl"
+				className="w-full flex flex-col 2xl:flex-row bg-blue-50 border border-1 border-gray-400 p-4 rounded-3xl"
 			>
-				<div className="lg:basis-1/2 pt-8">
-					<div className="flex gap-4 items-center">
+				<section className="lg:basis-1/2 py-8 lg:ps-12 ps-4">
+					<hgroup className="flex gap-4 items-center">
 						<ImportContactsIcon className="size-10" />
 						<h3 className="text-4xl font-semibold">Books</h3>
-					</div>
-					<p className="pt-6">
-						This page serves as an overview of your personal{" "}
-						<span className="font-semibold text-blue-700">insights</span> that you obtained from the books you have
-						read. Individual insights are grouped in various{" "}
-						<span className="font-semibold text-blue-700">categories</span>, which you can create, update or delete
-						according to your preferences.
+					</hgroup>
+					<p className="pt-6">Welcome to your personal book section 👋.</p>
+					<p className="pt-3">
+						You can use this space to manage all the books you have ever read. Each book consists of title,
+						authors, categories, description and content. The content represents your notes and insights. We highly
+						recommend to follow the given structure of the content in the form when creating new book.
 					</p>
-				</div>
-				<div className="lg:basis-1/2 flex justify-center">
+					<p className="pt-3">
+						You can use <span className="font-semibold text-blue-700">Markdown</span> to style the content. We
+						altered some of the tags to make the output better match our expectations (see the help section in the
+						form). Just keep in mind that{" "}
+						<span className="font-semibold text-blue-700">beauty lies in simplicity</span>.{" "}
+					</p>
+				</section>
+				<section className="lg:basis-1/2 flex justify-center items-center">
 					<div className="flex flex-col">
 						<Image
 							src="/reading.svg"
@@ -56,9 +61,9 @@ export default function BookSection({ books }: Params) {
 							</Link>
 						</p>
 					</div>
-				</div>
+				</section>
 			</Paper>
-			<div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-4">
+			<section className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-4">
 				<Paper
 					className=" py-[55px] bg-gray-200 flex flex-col gap-4 justify-center items-center rounded-3xl hover:bg-gray-100 hover:cursor-pointer active:bg-gray-50"
 					onClick={() => router.push("/books/bookForm")}
@@ -68,7 +73,7 @@ export default function BookSection({ books }: Params) {
 				</Paper>
 				{books.map((book) => {
 					return (
-						<div key={book.id} className="relative w-full">
+						<article key={book.id} className="relative w-full">
 							{/*
 		 						This element is used as a anchor for links referencing this particular book.
 		 					 	It moves content of the page a bit down, so that the book card is not covered by the navigation bar.
@@ -76,47 +81,34 @@ export default function BookSection({ books }: Params) {
 							<div id={book.id} className="invisible absolute top-[-5.5rem]"></div>
 
 							{/* Book card */}
-							<Link href={`/books/${book.id}`}>
-								<Card className="w-full rounded-3xl border hover:shadow-lg hover:shadow-gray-600  hover:cursor-pointer">
-									<CardContent>
-										<Typography gutterBottom variant="h5" className="text-blue-700 font-medium">
+							<Card className="w-full h-full rounded-3xl border hover:shadow-lg hover:shadow-gray-600 p-5">
+								<CardContent>
+									<div className="flex justify-between items-center">
+										<Typography gutterBottom variant="h5" className="m-0 text-blue-700 font-medium">
 											{book.title}
 										</Typography>
-										<Typography variant="body1" color="text.secondary">
-											{JSON.stringify(book.authors.map((a) => `${a.firstName} ${a.lastName}`))
-												.replace(/[\[\]\"]/g, "")
-												.replace(",", ", ")}
-										</Typography>
+										<RemoveDialog book={book} />
+									</div>
+									<Typography variant="body1" color="text.secondary">
+										{JSON.stringify(book.authors.map((a) => `${a.firstName} ${a.lastName}`))
+											.replace(/[\[\]\"]/g, "")
+											.replace(",", ", ")}
+									</Typography>
 
-										<Typography variant="body2" color="text.secondary" className="pt-8 line-clamp-3 text-black">
-											{book.description}
-										</Typography>
-									</CardContent>
-									<CardActions>
-										<Button size="small">Learn More</Button>
-									</CardActions>
-								</Card>
-							</Link>
-						</div>
+									<Typography variant="body2" color="text.secondary" className="pt-8 line-clamp-4 text-black">
+										{book.description}
+									</Typography>
+								</CardContent>
+								<CardActions>
+									<Button size="small" onClick={() => router.push(`/books/${book.id}`)}>
+										Learn More
+									</Button>
+								</CardActions>
+							</Card>
+						</article>
 					);
 				})}
-			</div>
-		</div>
-		// <div className="flex flex-col gap-4">
-		// 	<div className="flex gap-4 items-center">
-		// 		<ImportContactsIcon className="size-10" />
-		// 		<h3 className="text-4xl font-semibold">Books</h3>
-		// 	</div>
-		// 	<p className="mb-8">
-		// 		This page serves as an overview of your personal{" "}
-		// 		<span className="font-semibold text-blue-700">insights</span> that you obtained from the books you have
-		// 		read. Individual insights are grouped in various{" "}
-		// 		<span className="font-semibold text-blue-700">categories</span>, which you can create, update or delete
-		// 		according to your preferences.
-		// 	</p>
-
-		// 	{/* CARDS */}
-
-		// </div>
+			</section>
+		</section>
 	);
 }

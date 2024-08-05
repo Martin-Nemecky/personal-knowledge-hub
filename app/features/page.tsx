@@ -1,7 +1,7 @@
 import { getSessionData } from "../_actions/session-actions";
 import { getUserById } from "../_actions/users-actions";
 import Footer from "../_components/footer";
-import Header from "../_components/header";
+import Header from "../_components/header/header";
 import { User } from "../_types/definitions";
 
 export default async function FeaturesPage() {
@@ -15,9 +15,9 @@ export default async function FeaturesPage() {
 	return (
 		<>
 			<Header user={user} />
-			<div className="h-[400px] ">
+			<main className="h-[400px] ">
 				<p className="bg-amber-300 p-6 m-6 rounded-2xl">Features page is not implemented, yet.</p>
-			</div>
+			</main>
 			<Footer />
 		</>
 	);

@@ -8,7 +8,7 @@ const encodedKey = new TextEncoder().encode(secretKey);
 const algorithm = "HS256";
 
 export async function createSession(userId: string) {
-	const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+	const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 	const session = await encrypt({ userId, expiresAt });
 
 	cookies().set("session", session, {
@@ -28,7 +28,7 @@ export async function encrypt(payload: any) {
 	return new SignJWT(payload)
 		.setProtectedHeader({ alg: algorithm })
 		.setIssuedAt()
-		.setExpirationTime("7d")
+		.setExpirationTime("1d")
 		.sign(encodedKey);
 }
 

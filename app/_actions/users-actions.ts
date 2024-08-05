@@ -1,6 +1,6 @@
 "use server";
 
-import { readUserById, readUserByUsername } from "@/db/queries";
+import { readUserById, readUserByUsername } from "@/db/queries/user-queries";
 import { User } from "../_types/definitions";
 
 export async function getUserByUsername(username: string): Promise<User> {

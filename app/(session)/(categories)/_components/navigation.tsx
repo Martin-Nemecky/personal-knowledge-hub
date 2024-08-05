@@ -44,13 +44,12 @@ export default function Navigation() {
 	}, []);
 	return (
 		<nav className="flex md:flex-row flex-col justify-between items-center">
-			<div>
-				<h1 className="text-lg text-center font-bold p-4">
-					<Link href={"/"} className="block">
-						Personal Knowledge Hub
-					</Link>
-				</h1>
-			</div>
+			<h1 className="text-lg text-center font-bold p-4">
+				<Link href={"/"} className="block">
+					Personal Knowledge Hub
+				</Link>
+			</h1>
+
 			<div>
 				<ul className="flex justify-center gap-2">
 					{links.map((link) => (
@@ -78,9 +77,9 @@ export default function Navigation() {
 							disableElevation
 							onClick={handleClick}
 							endIcon={<KeyboardArrowDownIcon />}
-							className="rounded-full py-3 px-2 lg:w-28 "
+							className="rounded-full py-3 md:px-10 px-2"
 						>
-							{user?.username}
+							{user == null ? "not defined" : user.username}
 						</Button>
 						<Menu
 							id="basic-menu"

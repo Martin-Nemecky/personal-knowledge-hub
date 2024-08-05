@@ -5,8 +5,9 @@ import BookSection from "./_components/book-section";
 import ContentsSection from "./_components/contents-section";
 import { useEffect, useState } from "react";
 import { getAllBooks } from "@/app/_actions/book-actions";
-import { Book, Category } from "@/db/type-definitions";
+
 import { getAllCategories } from "@/app/_actions/category-actions";
+import { Book, Category } from "@/app/_types/definitions";
 
 export default function Books() {
 	const [books, setBooks] = useState<Book[]>([]);
@@ -44,20 +45,20 @@ export default function Books() {
 		});
 
 	return (
-		<div className="flex lg:flex-row flex-col size-full">
-			<div className="lg:fixed left-8 top-28 bottom-0 lg:w-60 lg:z-10 pe-4 pt-4 lg:pt-0 lg:overflow-y-auto">
+		<section className="flex lg:flex-row flex-col size-full">
+			<section className="lg:fixed left-8 top-28 bottom-0 lg:w-60 lg:z-10 pe-4 pt-4 lg:pt-0 lg:overflow-y-auto">
 				<CategorySection
 					allCategories={categories}
 					selectedCategories={selectedCategories}
 					setSelectedCategories={setSelectedCategories}
 				/>
-			</div>
-			<div className="lg:ps-96 pe-4 lg:pe-8 xl:pe-96 pt-12 ">
+			</section>
+			<section className="lg:ps-96 pe-4 lg:pe-8 xl:pe-96 pt-12 ">
 				<BookSection books={visibleBooks} />
-			</div>
-			<div className="hidden xl:block fixed right-8 top-28 bottom-0 w-60 z-10 overflow-y-auto">
+			</section>
+			<section className="hidden xl:block fixed right-8 top-28 bottom-0 w-60 z-10 overflow-y-auto">
 				<ContentsSection books={visibleBooks} />
-			</div>
-		</div>
+			</section>
+		</section>
 	);
 }

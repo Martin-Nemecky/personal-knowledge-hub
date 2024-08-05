@@ -59,6 +59,7 @@ export default function ContentEditor({ contentValue, setContentValue }: Params)
 				<div className="flex flex-col gap-2">
 					<textarea
 						name="content"
+						title="Content"
 						defaultValue={contentValue}
 						className={`w-full h-[500px] border p-2`}
 						onChange={(e) => setContentValue(e.target.value)}

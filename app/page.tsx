@@ -1,7 +1,7 @@
 import { getUserById } from "./_actions/users-actions";
 import { User } from "./_types/definitions";
 import { getSessionData } from "./_actions/session-actions";
-import Header from "./_components/header";
+import Header from "./_components/header/header";
 import Footer from "./_components/footer";
 import Features from "./_components/features";
 
