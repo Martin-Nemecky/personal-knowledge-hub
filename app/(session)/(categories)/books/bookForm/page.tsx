@@ -62,7 +62,7 @@ export default function BookForm() {
 	}
 
 	return (
-		<form className="flex flex-col gap-4 py-8 md:px-32 px-4" onSubmit={handleSubmit}>
+		<form className="flex flex-col gap-4 py-8 md:px-32" onSubmit={handleSubmit}>
 			<h1 className="md:text-4xl text-2xl md:pt-10 font-black ">Create or Update Book</h1>
 			<TitleField />
 			<AuthorsField authors={authors} setAuthors={setAuthors} />
@@ -319,7 +319,7 @@ function ContentField({ contentValue, setContentValue }: ContentParams) {
 				</IconButton>
 			</div>
 			{tooltipOpen && (
-				<div className="relative right-1 bg-gray-200  overflow-y-auto z-10 rounded-lg p-4 border-2">
+				<div className="relative right-1 bg-gray-200  overflow-y-auto z-10 rounded-lg p-2 border-2">
 					<h1 className="font-semibold text-lg">Hints</h1>
 					<p>
 						To design your output, you should use Markdown. There are plenty of tags to remember, but we selected
