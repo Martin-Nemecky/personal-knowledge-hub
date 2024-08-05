@@ -3,7 +3,10 @@ import Image from "next/image";
 
 export default function ThoughtsSection() {
 	return (
-		<article id="thoughts" className="w-full flex flex-col lg:flex-row z-20 bg-gray-100 shadow-inner px-20 py-2">
+		<article
+			id="thoughts"
+			className="w-full flex flex-col lg:flex-row z-20 bg-gray-100 shadow-inner sm:px-20 px-8 py-2"
+		>
 			<section className="basis-1/2 lg:ps-32 lg:py-32 pt-8">
 				<h1 className="font-bold text-3xl">Thoughts</h1>
 				<p className="bg-amber-300 p-6 mt-4 rounded-2xl">This feature is not available, yet.</p>
