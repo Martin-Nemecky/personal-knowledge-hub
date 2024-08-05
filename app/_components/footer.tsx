@@ -9,7 +9,7 @@ const links = [
 
 export default function Footer() {
 	return (
-		<footer className="relative z-20 bg-gradient-to-r from-5% from-gray-700 via-blue-800 to-gray-700 to-95% text-white flex flex-col justify-center px-20 py-8">
+		<footer className="relative z-20 bg-gradient-to-r from-5% from-gray-700 via-blue-800 to-gray-700 to-95% text-white flex flex-col justify-center sm:px-20 px-8 py-8">
 			<div className="flex gap-8">
 				<h2 className="font-bold text-xl">Personal Knowledge Hub</h2>
 				<section>
